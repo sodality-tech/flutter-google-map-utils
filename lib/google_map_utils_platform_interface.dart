@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'google_map_utils_method_channel.dart';
@@ -23,7 +24,11 @@ abstract class GoogleMapUtilsPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
+  Future<LatLng> getGeometryOffset({
+    required LatLng from,
+    required double direction,
+    required double distance,
+  }) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }

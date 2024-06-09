@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:google_map_utils/google_map_utils.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  LatLng _offsetLocation = const LatLng(0, 0);
   final _googleMapUtilsPlugin = GoogleMapUtils();
 
   @override
@@ -27,14 +28,17 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    LatLng offsetLocation;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _googleMapUtilsPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      offsetLocation = await _googleMapUtilsPlugin.getGeometryOffset(
+        from: LatLng(0, 0),
+        direction: 60,
+        distance: 500,
+      );
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      offsetLocation = const LatLng(0, 0);
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -43,7 +47,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _offsetLocation = offsetLocation;
     });
   }
 
@@ -55,7 +59,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Running on: $_offsetLocation\n'),
         ),
       ),
     );
