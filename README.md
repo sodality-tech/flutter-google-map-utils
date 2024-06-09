@@ -1,6 +1,6 @@
 # google_map_utils
 
-A new Flutter plugin project.
+This is a flutter package wrapper for native google_map_utils packages
 
 ## Getting Started
 
