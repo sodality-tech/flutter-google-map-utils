@@ -23,7 +23,6 @@ class MethodChannelGoogleMapUtils extends GoogleMapUtilsPlatform {
       'distance': distance,
       'heading': direction,
     }))!;
-    print(latLng);
     return LatLng(latLng[0] as double, latLng[1] as double);
   }
 }
