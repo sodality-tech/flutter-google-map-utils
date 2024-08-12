@@ -23,13 +23,13 @@ public class GoogleMapUtilsPlugin: NSObject, FlutterPlugin {
             return
       }
         
-              // Print statement to log the received arguments
-      print("Received arguments - Latitude: \(latitude), Longitude: \(longitude), Distance: \(distance), Heading: \(heading)")
+      // Print statement to log the received arguments
+      //print("Received arguments - Latitude: \(latitude), Longitude: \(longitude), Distance: \(distance), Heading: \(heading)")
               
-        let offsetLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude).offset(distance: distance, heading:heading);
+      let offsetLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude).offset(distance: distance, heading:heading);
       result([offsetLocation.latitude, offsetLocation.longitude])
     default:
-        result(FlutterMethodNotImplemented)
+      result(FlutterMethodNotImplemented)
     }
   }
 }
